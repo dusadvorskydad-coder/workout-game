@@ -1,13 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { Challenge, Result } from '../types';
 
-// Výsledky jsou zatím uložené jen v tomto zařízení. Až přibude server,
-// stačí vyměnit obsah funkcí loadResults a addResult.
+import { fetchSeasonResults, submitResult, supabase } from './backend';
+
+// S nastaveným Supabase (viz backend.ts) jsou výsledky společné pro všechny hráče.
+// Bez něj se ukládají jen v tomto zařízení.
 
 const RESULTS_KEY = 'workout-game/results/v1';
 const NICKNAME_KEY = 'workout-game/nickname/v1';
 
 export async function loadResults(): Promise<Result[]> {
+  if (supabase) return fetchSeasonResults(supabase);
   const raw = await AsyncStorage.getItem(RESULTS_KEY);
   if (!raw) return [];
   try {
@@ -19,6 +22,7 @@ export async function loadResults(): Promise<Result[]> {
 }
 
 export async function addResult(result: Omit<Result, 'id' | 'at'>): Promise<Result> {
+  if (supabase) return submitResult(supabase, result);
   const saved: Result = {
     ...result,
     id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,

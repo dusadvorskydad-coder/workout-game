@@ -14,8 +14,21 @@ Prototyp je zatím pro **Nymburk a okolí**.
 - stopky a zápis výsledku
 - žebříček každé výzvy na každém hřišti, sezóna je kalendářní měsíc
 
-Výsledky se zatím ukládají **jen v zařízení**. Společný žebříček mezi lidmi
-potřebuje server (plánuje se Supabase).
+Bez nastavení se výsledky ukládají **jen v zařízení**. Společný žebříček se
+zapne připojením k Supabase (viz níže).
+
+## Společný žebříček (Supabase)
+
+1. Na [supabase.com](https://supabase.com) založ bezplatný projekt (region Frankfurt).
+2. V **SQL Editoru** spusť celý soubor `supabase/schema.sql`.
+3. V **Authentication → Sign In / Providers** zapni **Allow anonymous sign-ins**.
+4. Zkopíruj `.env.example` jako `.env` a doplň adresu projektu a veřejný klíč
+   (**Project Settings → API Keys**, klíč *publishable*, dříve *anon*).
+   Tajný klíč (*secret* / *service_role*) do aplikace nepatří.
+5. Aplikaci spusť znovu.
+
+Hráč se nepřihlašuje e-mailem: při prvním uložení výsledku se mu založí anonymní
+účet svázaný se zařízením a zvolená přezdívka se mu zarezervuje.
 
 ## Spuštění
 
@@ -48,3 +61,5 @@ a skript pustit znovu.
 - `src/components` – mapa (`SpotMap.tsx` pro telefon, `SpotMap.web.tsx` pro web), stopky
 - `src/data/challenges.ts` – výzvy a návody ke cvikům
 - `src/lib/results.ts` – ukládání výsledků a výpočet žebříčku
+- `src/lib/backend.ts` – připojení k Supabase
+- `supabase/schema.sql` – tabulky a pravidla přístupu

@@ -26,9 +26,22 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    loadResults().then(setResults).catch(() => {});
     loadNickname().then(setNickname).catch(() => {});
   }, []);
+
+  // Výsledky se načtou znovu při každém přechodu mezi obrazovkami,
+  // aby byly vidět i čerstvé výsledky ostatních hráčů.
+  useEffect(() => {
+    let cancelled = false;
+    loadResults()
+      .then((loaded) => {
+        if (!cancelled) setResults(loaded);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [route]);
 
   const goBack = useCallback(() => {
     setRoute((current) =>

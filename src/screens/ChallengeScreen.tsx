@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Header from '../components/Header';
 import Stopwatch from '../components/Stopwatch';
 import { EXERCISES } from '../data/challenges';
+import { isOnline } from '../lib/backend';
 import { isAtSpot } from '../lib/geo';
 import { formatValue, leaderboard, seasonLabel } from '../lib/results';
 import type { LocationState } from '../lib/useLocation';
@@ -46,6 +47,7 @@ export default function ChallengeScreen({
   const [reps, setReps] = useState('');
   const [saving, setSaving] = useState(false);
   const [savedValue, setSavedValue] = useState<number | null>(null);
+  const [saveError, setSaveError] = useState<string | null>(null);
   // Po uložení se stopky založí znovu, aby šel hned další pokus.
   const [attempt, setAttempt] = useState(0);
 
@@ -73,12 +75,15 @@ export default function ChallengeScreen({
   const save = async () => {
     if (!canSave || value == null) return;
     setSaving(true);
+    setSaveError(null);
     try {
       await onSave(value, here);
       setSavedValue(value);
       setTimeMs(null);
       setReps('');
       setAttempt((n) => n + 1);
+    } catch (e) {
+      setSaveError(e instanceof Error ? e.message : 'Výsledek se nepodařilo uložit.');
     } finally {
       setSaving(false);
     }
@@ -218,8 +223,10 @@ export default function ChallengeScreen({
               {saving ? 'Ukládám…' : value != null && value > 0 ? `Uložit ${formatValue(challenge, value)}` : 'Uložit výsledek'}
             </Text>
           </Pressable>
-          <Text style={styles.hint}>
-            {savedValue != null && value == null
+          <Text style={[styles.hint, saveError != null && styles.hintError]}>
+            {saveError != null
+              ? saveError
+              : savedValue != null && value == null
               ? `Uloženo: ${formatValue(challenge, savedValue)}. Můžeš zkusit další pokus.`
               : hint}
           </Text>
@@ -229,7 +236,9 @@ export default function ChallengeScreen({
           <Text style={styles.heading}>Žebříček · {seasonLabel(now)}</Text>
         </View>
         <Text style={styles.boardNote}>
-          Zatím se ukládá jen v tomto zařízení. Společný žebříček přibude se serverem.
+          {isOnline
+            ? 'Společný žebříček všech hráčů. Každý je v něm se svým nejlepším výsledkem.'
+            : 'Ukládá se jen v tomto zařízení, společný žebříček není nastavený.'}
         </Text>
 
         {board.length === 0 ? (
@@ -323,6 +332,7 @@ const styles = StyleSheet.create({
   saveText: { color: colors.accentText, fontSize: 17, fontWeight: '800' },
   saveTextDisabled: { color: colors.muted },
   hint: { color: colors.muted, fontSize: 13, textAlign: 'center', marginTop: 10 },
+  hintError: { color: colors.danger },
   boardHead: { marginTop: 10, paddingHorizontal: 4 },
   heading: { color: colors.text, fontSize: 17, fontWeight: '800' },
   boardNote: { color: colors.muted, fontSize: 12, paddingHorizontal: 4, marginTop: 3, marginBottom: 8 },
