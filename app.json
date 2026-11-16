@@ -19,7 +19,14 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "single",
+      "name": "Workout hřiště",
+      "shortName": "Workout",
+      "lang": "cs",
+      "themeColor": "#0f1412",
+      "backgroundColor": "#0f1412",
+      "display": "standalone"
     },
     "backgroundColor": "#0f1412",
     "plugins": [
@@ -29,6 +36,9 @@
           "locationWhenInUsePermission": "Poloha se používá k zobrazení hřišť ve tvém okolí a k ověření, že cvičíš přímo na hřišti."
         }
       ]
-    ]
+    ],
+    "experiments": {
+      "baseUrl": "/workout-game"
+    }
   }
 }

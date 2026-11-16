@@ -1,0 +1,32 @@
+# Sestaví webovou verzi a nahraje ji do větve gh-pages,
+# odkud ji GitHub Pages zveřejní.
+name: Zveřejnění webu
+
+on:
+  push:
+    branches: [main, claude/fitness-gamification-app-gaig0b]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: web
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npx expo export --platform web
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

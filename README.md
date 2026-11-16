@@ -22,7 +22,7 @@ zapne připojením k Supabase (viz níže).
 1. Na [supabase.com](https://supabase.com) založ bezplatný projekt (region Frankfurt).
 2. V **SQL Editoru** spusť celý soubor `supabase/schema.sql`.
 3. V **Authentication → Sign In / Providers** zapni **Allow anonymous sign-ins**.
-4. Zkopíruj `.env.example` jako `.env` a doplň adresu projektu a veřejný klíč
+4. Do souboru `.env` doplň adresu projektu a veřejný klíč
    (**Project Settings → API Keys**, klíč *publishable*, dříve *anon*).
    Tajný klíč (*secret* / *service_role*) do aplikace nepatří.
 5. Aplikaci spusť znovu.
@@ -39,6 +39,12 @@ npm start          # na telefonu přes aplikaci Expo Go (naskenuj QR kód)
 ```
 
 Kontrola typů: `npm run typecheck`
+
+## Zveřejnění webu
+
+Po každém nahrání změn sestaví GitHub Actions webovou verzi a uloží ji do větve
+`gh-pages` (viz `.github/workflows/web.yml`). GitHub Pages ji pak zveřejní na
+<https://dusadvorskydad-coder.github.io/workout-game/>.
 
 ## Data o hřištích
 
