@@ -1,0 +1,114 @@
+[
+  {
+    "id": "node-13751413717",
+    "lat": 50.181586,
+    "lon": 15.051396,
+    "radiusM": 285,
+    "stationCount": 9,
+    "equipment": [
+      "horizontal_bar",
+      "inclined_bar",
+      "inclined_ladder",
+      "monkey_bars",
+      "parallel_bars",
+      "sit-up",
+      "stairs"
+    ],
+    "notes": [
+      "bradlová lavice",
+      "klopená a rovná lavice"
+    ],
+    "osmIds": [
+      "node/13751413717",
+      "node/13751413719",
+      "node/13751413757",
+      "node/13751413759",
+      "node/13751413761",
+      "node/13751413765",
+      "node/13751413784",
+      "node/13751413785",
+      "node/13751413786"
+    ],
+    "name": "Workout Nymburk",
+    "place": "Nymburk"
+  },
+  {
+    "id": "way-1499785207",
+    "lat": 50.17744,
+    "lon": 15.024002,
+    "radiusM": 0,
+    "stationCount": 1,
+    "equipment": [],
+    "notes": [
+      "Step&Surf FIT A59, válec FIT A71, houpačka FIT D05, twist FIT D08"
+    ],
+    "osmIds": [
+      "way/1499785207"
+    ],
+    "name": "Workout Nymburk 2",
+    "place": "Nymburk"
+  },
+  {
+    "id": "way-1106866899",
+    "lat": 50.151795,
+    "lon": 15.125099,
+    "radiusM": 0,
+    "stationCount": 1,
+    "equipment": [],
+    "notes": [],
+    "osmIds": [
+      "way/1106866899"
+    ],
+    "name": "Workout Poděbrady",
+    "place": "Poděbrady"
+  },
+  {
+    "id": "node-12856958961",
+    "lat": 50.14696,
+    "lon": 15.139493,
+    "radiusM": 24,
+    "stationCount": 5,
+    "equipment": [
+      "push-up",
+      "sit-up"
+    ],
+    "notes": [],
+    "osmIds": [
+      "node/12856958961",
+      "node/12856958962",
+      "node/12856958963",
+      "node/12856958964",
+      "node/12856958965"
+    ],
+    "name": "Workout Poděbrady 2",
+    "place": "Poděbrady"
+  },
+  {
+    "id": "node-11976613930",
+    "lat": 50.128827,
+    "lon": 14.956543,
+    "radiusM": 0,
+    "stationCount": 1,
+    "equipment": [],
+    "notes": [],
+    "osmIds": [
+      "node/11976613930"
+    ],
+    "name": "Workout Třebestovice",
+    "place": "Třebestovice"
+  },
+  {
+    "id": "way-1482254718",
+    "lat": 50.182096,
+    "lon": 14.88976,
+    "radiusM": 0,
+    "stationCount": 1,
+    "equipment": [],
+    "notes": [],
+    "osmIds": [
+      "way/1482254718"
+    ],
+    "name": "Workout Ostrá",
+    "place": "Ostrá"
+  }
+]
